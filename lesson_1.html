@@ -53,7 +53,70 @@
     <div class="container">
 
       <h1>Lesson 1: Varijable</h1>
-      <p></p>
+      <p>Pročitati <a href="http://javascript.crockford.com/code.html">Code Conventions for the JavaScript Programming Language</a></p>
+	  <h2>Komentari</h2>
+      <pre>
+// Komentar od jedne linije
+
+/*
+ * Komentari 
+ * od 
+ * vise 
+ * linija
+ */
+	  </pre>
+	  <h2>Identifiers</h2>
+	  <p>Označavaju varijable, funkcije, svojstva, argumente... Sastoje se od jednog ili više znakova uz dva vrlo jednostavna pravila:</p>
+	  <ol>
+		  <li>prvi znak mora biti slovo, underscore ili $</li>
+		  <li>svi ostali znakovi mogu biti slova, brojevi, underscoreovi, $, osim razmaka</li>
+	  </ol>
+      <pre>
+numSeconds
+_value
+getRandomValue
+	  </pre>
+	  <h2>Case sensitive</h2>
+      <pre>
+numseconds
+_VALUE
+getrandomvalue
+	  </pre>
+	  <h2>Statements</h2>
+	  <p>U JavaScriptu svaka naredba završava s ; (točka-zarez). Iako ih možemo izostaviti, nije preporučljivo.</p>
+      <pre>
+var answer = 42
+console.log(answer)
+	  </pre>
+	  <h2>Keywords i reserved words</h2>
+      <pre>
+...
+	  </pre>
+	  <h2>Varijable</h2>
+      <pre>
+// razlika između globalnih i lokalnih varijabli
+// prilikom deklaracije var ograničava scope varijable na lokalni scope
+
+function sayHi() {
+    var message = 'Hello!';
+}
+
+function sayHiToAll() {
+    message = 'Hello!';
+}
+
+sayHiToAll();
+console.log(message);
+	  </pre>
+      <h2>Tipovi podataka</h2>
+      <ul>
+          <li>undefined</li>
+          <li>null</li>
+          <li>boolean</li>
+          <li>number</li>
+          <li>string</li>
+          <li>object</li>
+      </ul>
 
     </div> <!-- /container -->
 	

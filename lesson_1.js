@@ -16,7 +16,7 @@ function sayHi() {
 }
 
 function sayHiToAll() {
-    message = 'Hello!';
+    message = 'Hello to All!';
 }
 
 sayHiToAll();
@@ -28,5 +28,30 @@ console.log(message);
 console.log(typeof message);
 console.log(typeof answer);
 console.log(typeof question);
+
+
+function hi() {
+    // Singe var pattern
+    var message,
+        a, 
+        b;
+    
+    message = 'Hi';
+    
+    a = b = 0;
+    
+    console.log(a, b);
+    
+}
+
+
+var global_var = 1;
+global_novar = 2;
+
+(function () {
+    global_fromfunc = 3;
+}());
+
+
 
 

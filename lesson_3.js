@@ -9,9 +9,12 @@ var random= function(){
 };
 a = new Array();
 a.push(4,5,6,3,2,1,7,6,55,6,65,12,21,34);
-console.log("novi: ", a);
+console.log("novi: ",a);
+document.write(a+"<br>");
 a.sort(function(c,b){return c-b});
+document.write(a+"<br>");
 console.log("sortirani: ", a);
 a.random = random;
 a.random();
+document.write(a+"<br>");
 console.log("random: ", a);

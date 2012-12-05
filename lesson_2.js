@@ -48,9 +48,9 @@ var testVar = function ( unknownVar ) {
     }
 };
 
-//days.toString = function () {
-//    return "He, he, he";
-//};
+days.toString = function () {
+    return "He, he, he";
+};
 
 var sviDaniUTjednu = days.join(";");
 

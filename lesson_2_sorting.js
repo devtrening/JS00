@@ -53,7 +53,7 @@ var deva = {
 /*
  * Isprobajte...
  */
-//arr_people.printAll();
+console.log(arr_people.printAll());
 //arr_people.sort();
 //arr_people.printAll(); // no change
 //arr_people.sort(deva.compareByName);

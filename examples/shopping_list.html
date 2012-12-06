@@ -27,22 +27,24 @@
   <body>
 
     <div class="container">
-		<div class="input-append">	
-			<input type="text" name="itemName" id="inpNewItem" class="span2">
-			<button type="button" id="btnAddItem" class="btn btn-warning">Add item <i class="icon-ok-sign icon-white"></i></button>
-		</div>
-	<div id="divItemContainer" class="container">	
-		<div class="alert">
-			<button type="button" class="close">X</button>
-			<strong>Start adding elements to the list!</strong>
-			</div>
-	</div>
-	<div class="container">
-		<button type="button" id="btnCleanList" class="btn btn danger">Clean list</button>
-	</div>	
-    </div> <!-- /container -->
+        <div class="input-append">
+            <input type="text" id="inpNewItem" class="span2">
+            <button type="button" id="btnAddNewItem" class="btn btn-primary">Add item</button>
+        </div>
+    </div>
+     
+    <div id="divItemContainer" class="container">
+        <div class="span3 alert-info">
+            <button type="button" class="close"><i class="icon-plus-sign"></i></button>
+            <strong>Start adding elements to the list!</strong>
+        </div><br/><br/><br/>     
+    </div>
+      
+    <div class="container">
+        <button type="button" id="btnCleanList" class="btn btn-danger">Clear list</button>
+    </div>
 
-	<script src="shopping_list.js"></script>
-	
+    <script src="shopping_list.js"></script>
+
   </body>
 </html>

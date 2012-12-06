@@ -145,6 +145,7 @@
   }
   .span3 {
     width: 270px;
+	margin-left:0px;
   }
   .span2 {
     width: 170px;

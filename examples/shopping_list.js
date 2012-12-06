@@ -4,71 +4,66 @@
 
     var inpNewItem,
         btnAddNewItem,
-        btnCleanList,
-        divItemContainer,
-        arrShoppingList = [];
+        btnCleanList;
     
     inpNewItem = document.getElementById('inpNewItem');
     btnAddNewItem = document.getElementById('btnAddNewItem');
     btnCleanList = document.getElementById('btnCleanList');
-    divItemContainer = document.getElementById('divItemContainer');
+    
+    var Item = function(caption) {
+        this.caption = caption;
+        this.checked = 0;
+        this.divItem = document.createElement('div');
+        this.divItem.setAttribute('class', 'alert alert-success');
+        this.divItem.innerHTML = caption;
+        this.divItem.obj = this;
+        this.divItem.addEventListener('click', function() {
+            if (this.obj.checked === 0) {
+                this.setAttribute('class', 'alert alert-danger');
+                this.obj.checked = 1;
+            } else {
+                this.setAttribute('class', 'alert alert-success');
+                this.obj.checked = 0;
+            }
+        }, false);
+        return this;
+    };
+    
+    var objItemList = {
+        container : document.getElementById('divItemContainer'),
+        list : [],
+        
+        addItem : function(caption) {
+            var objItem = new Item(caption);
+            this.list.push(objItem);
+            this.container.appendChild(objItem.divItem);
+        },
+        
+        removeItem : function(item) {
+            item.divItem.parentNode.removeChild(item.divItem);
+        },
+        
+        purgeItems : function() {
+            for (var i = 0; i < this.list.length; i += 1) {
+                if (this.list[i].checked === 1) {
+                    this.removeItem(this.list[i]);
+                    this.list.splice(i,1);
+                    i -= 1;
+                }
+            }
+        }
+    };
     
     btnAddNewItem.addEventListener('click', function(){
         if (inpNewItem.value.trim() !== '') {
-            var newItem = {
-                caption : inpNewItem.value.trim(),
-                checked : 0,
-                divNewItem : {}
-            };
-            
-            var position = arrShoppingList.length;
-            arrShoppingList[position] = newItem;
-
-            var divNewItem = document.createElement('div');
-            divNewItem.setAttribute('class', 'alert');
-            divNewItem.setAttribute('data-position', position);
-            divNewItem.innerHTML = newItem.caption;
-            
-            arrShoppingList[position].divNewItem = divNewItem;
-            
-            var btnClose = document.createElement('button');
-            btnClose.setAttribute('type', 'button');
-            btnClose.setAttribute('class', 'close');
-            btnClose.innerHTML = 'x';
-            btnClose.addEventListener('click', function(){
-                var position = this.parentNode.getAttribute('data-position');
-                console.log(position);
-                if (arrShoppingList[position].checked === 1){
-                    arrShoppingList[position].checked = 0;
-                    this.parentNode.setAttribute('class', 'alert');
-                } else {
-                    arrShoppingList[position].checked = 1;
-                    this.parentNode.setAttribute('class', 'alert alert-error');
-                }
-      
-                console.log(arrShoppingList);
-            }, false);
-            
-            divNewItem.appendChild(btnClose);
-            
-            divItemContainer.appendChild(divNewItem);
-            
-            
+            objItemList.addItem(inpNewItem.value.trim());
             inpNewItem.value = '';
         } else {
             console.log('Please enter a value');
         }
     }, false);
     
-    btnCleanList.addEventListener('click', function(){
-        var i = arrShoppingList.length - 1;
-        while (i >= 0){
-            if (arrShoppingList[i].checked === 1){
-                arrShoppingList[i].divNewItem.parentNode.removeChild(arrShoppingList[i].divNewItem);
-                arrShoppingList.splice(i, 1);
-                console.log(arrShoppingList);
-            }
-            i -= 1;
-        }
+    btnCleanList.addEventListener('click', function() {
+        objItemList.purgeItems();
     }, false);
 }());

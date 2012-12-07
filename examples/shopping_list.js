@@ -1,6 +1,10 @@
 // shopping_list.js
 (function () {
     "use strict";
+    
+    // Simulation of constants
+    var ON = 1,
+        OFF = 2;
 
     var inpNewItem,
         btnAddNewItem,
@@ -11,36 +15,49 @@
     btnCleanList = document.getElementById('btnCleanList');
     
     var Item = function(caption) {
+        // Item title
         this.caption = caption;
-        this.checked = 0;
-        this.divItem = document.createElement('div');
-        this.divItem.setAttribute('class', 'alert alert-success');
-        this.divItem.innerHTML = caption;
-        this.divItem.obj = this;
-        this.divItem.addEventListener('click', function() {
-            if (this.obj.checked === 0) {
-                this.setAttribute('class', 'alert alert-danger');
-                this.obj.checked = 1;
+        
+        // Default checked state
+        this.checked = OFF;
+
+        // Item representation in DOM
+        this.DOMElement = document.createElement('div');
+        this.DOMElement.setAttribute('class', 'alert alert-success');
+        this.DOMElement.innerHTML = caption;
+        
+        // onClick
+        this.DOMElement.addEventListener('click', function() {
+            this.changeState();
+        }.bind(this), false);
+        
+        // method that changes checked ON/OFF and DOM appearance
+        this.changeState = function () {
+            if (this.checked === OFF) {
+                this.DOMElement.setAttribute('class', 'alert alert-danger');
+                this.checked = ON;
             } else {
-                this.setAttribute('class', 'alert alert-success');
-                this.obj.checked = 0;
+                this.DOMElement.setAttribute('class', 'alert alert-success');
+                this.checked = OFF;
             }
-        }, false);
+        };
+        
         return this;
     };
     
     var objItemList = {
         container : document.getElementById('divItemContainer'),
         list : [],
+        purge : [],
         
         addItem : function(caption) {
-            var objItem = new Item(caption);
-            this.list.push(objItem);
-            this.container.appendChild(objItem.divItem);
+            var item = new Item(caption);
+            this.list.push(item);
+            this.container.appendChild(item.DOMElement);
         },
         
         removeItem : function(item) {
-            item.divItem.parentNode.removeChild(item.divItem);
+            item.DOMElement.parentNode.removeChild(item.DOMElement);
         },
         
         purgeItems : function() {
@@ -58,6 +75,7 @@
         if (inpNewItem.value.trim() !== '') {
             objItemList.addItem(inpNewItem.value.trim());
             inpNewItem.value = '';
+            inpNewItem.focus();
         } else {
             console.log('Please enter a value');
         }

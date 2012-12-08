@@ -27,16 +27,22 @@
   <body>
 
     <div class="container">
-		<div>
-			<input class="xlarge span5" id="InpNewItem" type="text" name="InpNewItem"  value="">
-			<button id="BtnAddNewItem"class="btn btn-primary" type="submit">Add item</button>
-		</div>
-		<div class="container" id="ItemContainer">
-		</div>
-		<div class="container" >
-			<button id="BtnClear"class="btn btn-danger" >Clean list</button>
-		</div>
-    </div> <!-- /container -->
-	<script src="shopping_list.js"></script>
+        <div class="input-append">
+            <input type="text" id="inpNewItem" class="span2">
+            <button type="button" id="btnAddNewItem" class="btn">Add item</button>
+        </div>
+    </div>
+     
+    <div id="divItemContainer" class="container">
+
+    </div>
+      
+    <div class="container">
+        <button type="button" id="btnCleanList" class="btn btn-danger">Clean list</button>
+		<button type="button" id="btnUndo" class="btn" disabled="disabled">Undo</button>
+    </div>
+	
+    <script src="shopping_list.js"></script>
+
   </body>
 </html>

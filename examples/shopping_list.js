@@ -16,6 +16,7 @@
     btnAddNewItem = document.getElementById('btnAddNewItem');
     btnCleanList = document.getElementById('btnCleanList');
     btnSaveList = document.getElementById('btnSaveList');
+    btnUndo = document.getElementById('btnUndo');
     
     var Item = function(caption) {
         // Item title
@@ -63,10 +64,10 @@
 			//item koje treba restorat
 			this.aitem =item;
 			//zavisi dali je item dodan ili obrisan, promjena stanja se ne pamti.
-			this.restore =function(){}
+			this.restore =function(){};
 		};
-		
-		this.Add = function(item,restore){
+
+        this.Add = function(item,restore){
 			var newitem = new Tadd(item);
 			this.list.push(newitem);
 			newitem.restore = restore;
@@ -83,14 +84,14 @@
 		
 		// Undo button update
 		this.setButton = function (){			
-			if(this.list.length == 0){
-				btnUndo.setAttribute('disabled','disabled' );
+			if(this.list.length === 0){
+                btnUndo.setAttribute('disabled','disabled' );
 			} else{
 				btnUndo.removeAttribute('disabled');
 			}
 		};
 		
-	}
+	};
 	
     
     var objItemList = {
@@ -119,7 +120,7 @@
                     i -= 1;
                 }
             }
-        }
+        },
 
 		// item je bio dodan, undo ga mora obrisat
 		undoRemove : function(item){			
@@ -129,14 +130,12 @@
                     this.list.splice(i,1);                    
                 }
             }
-			this.save();
 		},
 		
 		// item je bio obrisan, undo ga mora vratit
 		undoAdd : function (item){
 			this.list.push(item);
             this.container.appendChild(item.DOMElement);						
-			this.save();			
 		},
 		// klik na undo tipku
 		doUndo : function (){

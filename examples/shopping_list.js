@@ -18,6 +18,45 @@
     btnSaveList = document.getElementById('btnSaveList');
     btnUndo = document.getElementById('btnUndo');
     
+	var WordsList = {
+		list : [],
+		
+		addWord : function (word){
+			if (!this.isInList(word.toUpperCase())){
+				this.list.push(word);				
+				this.save();
+				this.update();
+				console.log(this.list);
+			}
+		},
+		
+		isInList : function (word){
+			for(var i = 0, l = this.list.length; i < l; i++) {
+				if(this.list[i].toUpperCase() == word) {
+					return true;
+				}
+			}
+			return false;			
+		},
+		
+		save : function () {
+			localStorage.setItem('WordsList', JSON.stringify(this.list));
+		},
+		
+		load : function () {
+			var tmp = JSON.parse(localStorage.getItem('WordsList'));
+			if (tmp !== null){
+				this.list = tmp;
+				this.update();
+			};			
+		},
+		update : function () {
+			inpNewItem.setAttribute('data-provide', 'typeahead');
+			inpNewItem.setAttribute('data-items', '5');
+			inpNewItem.setAttribute('data-source', JSON.stringify(this.list));
+		}
+	}
+	
     var Item = function(caption) {
         // Item title
         this.caption = caption;
@@ -103,7 +142,7 @@
         addItem : function(caption) {
             var item = new Item(caption);
             this.list.push(item);
-            this.container.appendChild(item.DOMElement);
+            this.container.appendChild(item.DOMElement);			
 			return item;
         },
         
@@ -160,6 +199,7 @@
             var item = objItemList.addItem(inpNewItem.value.trim());
 			// neču da undo radi na učitavanje
 			objItemList.undo.Add(item,objItemList.undoRemove.bind(objItemList));
+			WordsList.addWord(inpNewItem.value.trim());
             inpNewItem.value = '';
             inpNewItem.focus();
         } else {
@@ -186,5 +226,5 @@
     for (var i = 0; i < localList.length; i += 1) {
         objItemList.addItem(localList[i].caption);
     }
-    
+    WordsList.load();
 }());

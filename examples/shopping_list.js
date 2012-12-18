@@ -260,7 +260,8 @@
 	// neznam kak drugačije uglavit typeahead , rado bi ga strpao u WordsList al bi onda vjerojatno imao problema sa "this"
 	$("#inpNewItem").typeahead({
         minLength: 3,
-        source: function(query, process) {			            
+        source: function(query, process) {	
+			console.log(WordsList.list);
 			return WordsList.list;
         },
 		matcher : function(item){
@@ -270,8 +271,7 @@
 				// edit distance
 				result = WordsList.getEditDistance(item,this.query)<4;
 			};
-			return  result;
-			
+			return  result;			
 		}
     });
 }());

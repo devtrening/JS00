@@ -248,6 +248,21 @@
         objItemList.doUndo();
     }, false);
     
+    inpNewItem.addEventListener('keydown', function(keyEvent) {
+        if (keyEvent.keyCode === 13) {
+            if (inpNewItem.value.trim() !== '') {
+                var item = objItemList.addItem(inpNewItem.value.trim());
+                // necu da undo radi na ucitavanje
+                objItemList.undo.Add(item,objItemList.undoRemove.bind(objItemList));
+                WordsList.addWord(inpNewItem.value.trim());
+                inpNewItem.value = '';
+                inpNewItem.focus();
+            } else {
+                console.log('Please enter a value');
+            }
+        }
+    }, false);
+    
     // window.setInterval(objStorage.localSaveList(objItemList.list), 1000);
     
     // Fill list from localStorage
